@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Hello seller</h1>
+  <form action="/seller" method="POST">
+    <input type="text" name="userid" placeholder="userid" required pattern="[a-fA-F0-9]{24}"> <!-- Ensure valid ObjectId -->
+    <input type="text" name="place" placeholder="place">
+    <input type="text" name="area" placeholder="area">
+    <input type="number" name="bedrooms" placeholder="bedrooms">
+    <input type="number" name="bathrooms" placeholder="bathrooms">
+    <input type="number" name="hospitals" placeholder="hospitals">
+    <input type="number" name="colleges" placeholder="colleges">
+    <button type="submit">Submit</button>
+  </form>
+  
+  <h2>Your Properties</h2>
+  <ul>
+    {{#each properties}}
+    <li>
+      <form action="/seller/properties/update" method="POST">
+        <input type="hidden" name="propertyId" value="{{this._id}}" />
+        <input type="hidden" name="userid" value="{{../sellerId}}" />
+        <label for="place">Place:</label>
+        <input type="text" id="place" name="place" value="{{this.place}}" required><br><br>
+        <label for="area">Area:</label>
+        <input type="text" id="area" name="area" value="{{this.area}}" required><br><br>
+        <label for="bedrooms">Bedrooms:</label>
+        <input type="number" id="bedrooms" name="bedrooms" value="{{this.bedrooms}}" required><br><br>
+        <label for="bathrooms">Bathrooms:</label>
+        <input type="number" id="bathrooms" name="bathrooms" value="{{this.bathrooms}}" required><br><br>
+        <label for="hospitals">Hospitals:</label>
+        <input type="number" id="hospitals" name="hospitals" value="{{this.hospitals}}" required><br><br>
+        <label for="colleges">Colleges:</label>
+        <input type="number" id="colleges" name="colleges" value="{{this.colleges}}" required><br><br>
+        <button type="submit">Update</button>
+      </form>
+      <form action="/seller/properties/delete" method="POST">
+        <input type="hidden" name="propertyId" value="{{this._id}}" />
+        <input type="hidden" name="userid" value="{{../sellerId}}" />
+        <button type="submit">Delete</button>
+      </form>
+    </li>
+    {{/each}}
+  </ul>
+</body>
+</html>

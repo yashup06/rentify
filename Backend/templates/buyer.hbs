@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buyer View</title>
+</head>
+<body>
+  <h1>Welcome Buyers</h1>
+
+  
+  <ul>
+    {{#each properties}}
+      <li>
+        {{this.place}} - {{this.area}} - {{this.bedrooms}} bedrooms - {{this.bathrooms}} bathrooms
+        <form action="/interest" method="POST">
+          <input type="hidden" name="propertyId" value="{{this._id}}">
+          <button type="submit">I'm interested</button>
+        </form>
+      </li>
+    {{/each}}
+  </ul>
+</body>
+</html>
